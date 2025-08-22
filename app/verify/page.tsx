@@ -43,31 +43,31 @@ function VerifyTicketContent() {
   // Enhanced error parsing function
   const parseError = (error: any): string => {
     const errorString = error?.message || error?.toString() || '';
-    
+
     if (errorString.includes('Already claimed') || errorString.includes('already claimed')) {
       return 'This ticket has already been claimed and verified.';
     }
-    
+
     if (errorString.includes('Token does not exist') || errorString.includes('ERC721: invalid token ID')) {
       return 'This ticket does not exist or has been burned.';
     }
-    
+
     if (errorString.includes('insufficient funds')) {
       return 'Insufficient funds to complete this transaction.';
     }
-    
+
     if (errorString.includes('user rejected transaction') || errorString.includes('user denied')) {
       return 'Transaction was cancelled by user.';
     }
-    
+
     if (errorString.includes('network')) {
       return 'Network connection error. Please check your connection and try again.';
     }
-    
+
     if (errorString.includes('Contract not deployed')) {
       return 'Smart contract not found on this network. Please switch to the correct network.';
     }
-    
+
     if (errorString.includes('execution reverted')) {
       const reasonMatch = errorString.match(/reason="([^"]+)"/);
       if (reasonMatch && reasonMatch[1]) {
@@ -79,7 +79,7 @@ function VerifyTicketContent() {
       }
       return 'Transaction was rejected by the smart contract.';
     }
-    
+
     return errorString || 'An unexpected error occurred. Please try again.';
   };
 
@@ -89,7 +89,7 @@ function VerifyTicketContent() {
       if (!window.ethereum) {
         throw new Error("MetaMask not found. Please install MetaMask.");
       }
-      
+
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: SEPOLIA_CHAIN_ID }],
@@ -136,7 +136,7 @@ function VerifyTicketContent() {
         }
       }
     };
-    
+
     checkNetwork();
   }, []);
 
@@ -155,16 +155,16 @@ function VerifyTicketContent() {
     setIsLoading(true);
     setStatus('🔍 Verifying ticket...');
     setTicketData(null);
-    
+
     try {
       const tokenToVerify = id ?? manualTokenId;
       console.log('🎫 Token to verify:', tokenToVerify);
-      
+
       if (!tokenToVerify || tokenToVerify.trim() === '') {
         setStatus('❌ Please enter a valid Token ID.');
         return;
       }
-      
+
       if (!window.ethereum) {
         setStatus('❌ MetaMask not found. Please install MetaMask to verify tickets.');
         return;
@@ -194,7 +194,7 @@ function VerifyTicketContent() {
       // Check if token exists and get data
       const owner: string = await contract.ownerOf(Number(tokenToVerify));
       const tokenURI: string = await contract.tokenURI(Number(tokenToVerify));
-      
+
       let isClaimed: boolean = false;
       try {
         isClaimed = await contract.isClaimed(Number(tokenToVerify));
@@ -203,12 +203,12 @@ function VerifyTicketContent() {
       }
 
       setStatus('🌐 Loading metadata...');
-      
+
       const metaRes = await fetch(tokenURI.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/'));
       if (!metaRes.ok) {
         throw new Error('Failed to load ticket metadata from IPFS');
       }
-      
+
       const metadata: TicketMetadata = await metaRes.json();
 
       const ticketData = { owner, metadata, tokenURI, isClaimed };
@@ -217,11 +217,11 @@ function VerifyTicketContent() {
 
       if (!id) setTokenId(tokenToVerify);
 
-      const finalStatus = isClaimed ? 
-        '✅ Ticket Already Claimed - Entry Allowed' : 
+      const finalStatus = isClaimed ?
+        '✅ Ticket Already Claimed - Entry Allowed' :
         '🎫 Valid Ticket - Ready to Claim';
       setStatus(finalStatus);
-      
+
     } catch (err) {
       console.error('💥 Verification error:', err);
       const friendlyError = parseError(err);
@@ -234,7 +234,7 @@ function VerifyTicketContent() {
   const handleClaim = async () => {
     console.log('🎟️ Starting claim process...');
     setIsClaimLoading(true);
-    
+
     try {
       if (!window.ethereum) {
         throw new Error('MetaMask not found. Please install MetaMask.');
@@ -254,10 +254,10 @@ function VerifyTicketContent() {
       const contract = getTicketContract(signer);
 
       setStatus('🔄 Processing claim...');
-      
+
       const tx = await contract.claimTicket(Number(tokenId));
       setStatus('⏳ Confirming transaction...');
-      
+
       await tx.wait();
 
       // Update database
@@ -269,12 +269,12 @@ function VerifyTicketContent() {
 
       setIsClaimed(true);
       setStatus('🎉 Ticket Claimed Successfully - Entry Allowed!');
-      
+
       // Update ticket data
       if (ticketData) {
         setTicketData({ ...ticketData, isClaimed: true });
       }
-      
+
     } catch (err) {
       console.error('💥 Claim error:', err);
       const friendlyError = parseError(err);
@@ -285,11 +285,11 @@ function VerifyTicketContent() {
   };
 
   const getStatusColor = () => {
-    if (status.includes('✅') || status.includes('🎉')) return 'text-green-600 bg-green-50 border-green-200';
-    if (status.includes('❌')) return 'text-red-600 bg-red-50 border-red-200';
-    if (status.includes('⚠️')) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-    if (status.includes('🔄') || status.includes('⏳')) return 'text-blue-600 bg-blue-50 border-blue-200';
-    return 'text-indigo-600 bg-indigo-50 border-indigo-200';
+    if (status.includes('✅') || status.includes('🎉')) return 'text-green-400 bg-green-900/30 border-green-600/50';
+    if (status.includes('❌')) return 'text-red-400 bg-red-900/30 border-red-600/50';
+    if (status.includes('⚠️')) return 'text-yellow-400 bg-yellow-900/30 border-yellow-600/50';
+    if (status.includes('🔄') || status.includes('⏳')) return 'text-blue-400 bg-blue-900/30 border-blue-600/50';
+    return 'text-indigo-400 bg-indigo-900/30 border-indigo-600/50';
   };
 
   const getStatusIcon = () => {
@@ -310,15 +310,15 @@ function VerifyTicketContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 relative">
+    <div className="min-h-screen bg-black relative">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
       <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
       <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
-      
+
       {/* Header */}
-      <div className="backdrop-blur-sm border-b border-purple-100 sticky top-0 z-10">
+      <div className="backdrop-blur-sm border-b border-neutral-800 pt-24 z-10">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -332,19 +332,19 @@ function VerifyTicketContent() {
                 </motion.span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
                   Ticket Verification
                 </h1>
-                <p className="text-gray-600 text-sm">Secure NFT ticket validation</p>
+                <p className="text-neutral-400 text-sm">Secure NFT ticket validation</p>
               </div>
             </div>
-            
+
             {ticketData && (
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={resetVerification}
-                className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg font-medium hover:bg-purple-200 transition-colors duration-200"
+                className="px-4 py-2 bg-neutral-800 text-neutral-300 rounded-lg font-medium hover:bg-neutral-700 transition-colors duration-200"
               >
                 Verify Another
               </motion.button>
@@ -359,19 +359,19 @@ function VerifyTicketContent() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-xl"
+            className="mb-6 p-4 bg-yellow-900/30 border-2 border-yellow-600/50 rounded-xl backdrop-blur-sm"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">⚠️</span>
                 <div>
-                  <h3 className="font-semibold text-yellow-800">Wrong Network</h3>
-                  <p className="text-sm text-yellow-700">Please switch to Sepolia testnet</p>
+                  <h3 className="font-semibold text-yellow-300">Wrong Network</h3>
+                  <p className="text-sm text-yellow-400">Please switch to Sepolia testnet</p>
                 </div>
               </div>
               <button
                 onClick={switchToSepolia}
-                className="px-4 py-2 bg-yellow-200 text-yellow-800 rounded-lg font-medium hover:bg-yellow-300 transition-colors"
+                className="px-4 py-2 bg-yellow-600 text-yellow-100 rounded-lg font-medium hover:bg-yellow-500 transition-colors"
               >
                 Switch Network
               </button>
@@ -384,22 +384,22 @@ function VerifyTicketContent() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8 p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-purple-200 shadow-lg"
+            className="mb-8 p-6 bg-neutral-900/70 backdrop-blur-sm rounded-2xl border-2 border-neutral-700 shadow-lg"
           >
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent mb-2">
                 Enter Token ID to Verify
               </h2>
-              <p className="text-gray-600">Please enter the NFT token ID you want to verify</p>
+              <p className="text-neutral-400">Please enter the NFT token ID you want to verify</p>
             </div>
-            
+
             <div className="flex gap-3 max-w-md mx-auto">
               <input
                 type="text"
                 value={manualTokenId}
                 onChange={(e) => setManualTokenId(e.target.value)}
                 placeholder="Enter Token ID (e.g., 1, 2, 3...)"
-                className="flex-1 px-4 py-3 border-2 border-purple-200 rounded-xl focus:border-purple-400 focus:outline-none transition-colors font-mono"
+                className="flex-1 px-4 py-3 border-2 border-neutral-600 bg-neutral-800 text-white rounded-xl focus:border-purple-500 focus:outline-none transition-colors font-mono placeholder-neutral-400"
                 onKeyPress={(e) => e.key === 'Enter' && handleVerify()}
               />
               <motion.button
@@ -446,18 +446,18 @@ function VerifyTicketContent() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8 p-6 bg-white/70 backdrop-blur-sm rounded-2xl border-2 hover:border-purple-700 border-t-indigo-600 border-purple-600 border-b-purple-600 shadow-lg"
+            className="mb-8 p-6 bg-neutral-900/70 backdrop-blur-sm rounded-2xl border-2 hover:border-purple-500 border-t-indigo-500 border-purple-600 border-b-purple-600 shadow-lg"
           >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                <h3 className="text-sm font-medium text-neutral-400 uppercase tracking-wide">
                   Verifying Token ID
                 </h3>
-                <p className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mt-1">
+                <p className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent mt-1">
                   #{tokenId}
                 </p>
               </div>
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-2xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-2xl flex items-center justify-center border border-purple-600/30">
                 <span className="text-2xl">🔢</span>
               </div>
             </div>
@@ -471,7 +471,7 @@ function VerifyTicketContent() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white/70 backdrop-blur-sm rounded-3xl border border-purple-200 shadow-xl overflow-hidden"
+              className="bg-neutral-900/70 backdrop-blur-sm rounded-3xl border border-neutral-700 shadow-xl overflow-hidden"
             >
               {ticketData.metadata?.image && (
                 <div className="relative h-64 bg-gradient-to-r from-purple-400 to-indigo-500">
@@ -489,11 +489,10 @@ function VerifyTicketContent() {
                     )}
                   </div>
                   <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      isClaimed 
-                        ? 'bg-green-500 text-white' 
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${isClaimed
+                        ? 'bg-green-500 text-white'
                         : 'bg-yellow-500 text-white'
-                    }`}>
+                      }`}>
                       {isClaimed ? '✅ Claimed' : '🟡 Unclaimed'}
                     </span>
                   </div>
@@ -503,38 +502,38 @@ function VerifyTicketContent() {
               <div className="p-8">
                 {!ticketData.metadata?.image && (
                   <div className="mb-6">
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+                    <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent mb-2">
                       {ticketData.metadata.name}
                     </h2>
                     {ticketData.metadata.description && (
-                      <p className="text-gray-600 text-lg">{ticketData.metadata.description}</p>
+                      <p className="text-neutral-400 text-lg">{ticketData.metadata.description}</p>
                     )}
                   </div>
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <div className="p-4 bg-purple-50 rounded-xl border border-purple-100">
+                  <div className="p-4 bg-purple-900/30 rounded-xl border border-purple-600/30">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <span className="text-purple-600">👤</span>
+                      <div className="w-8 h-8 bg-purple-800/50 rounded-lg flex items-center justify-center">
+                        <span className="text-purple-400">👤</span>
                       </div>
-                      <h3 className="font-semibold text-gray-800">Owner</h3>
+                      <h3 className="font-semibold text-white">Owner</h3>
                     </div>
-                    <p className="text-sm text-gray-600 font-mono bg-white px-3 py-2 rounded-lg border">
+                    <p className="text-sm text-neutral-300 font-mono bg-neutral-800 px-3 py-2 rounded-lg border border-neutral-600">
                       {ticketData.owner.slice(0, 10)}...{ticketData.owner.slice(-10)}
                     </p>
                   </div>
 
-                  <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                  <div className="p-4 bg-indigo-900/30 rounded-xl border border-indigo-600/30">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                        <span className="text-indigo-600">📋</span>
+                      <div className="w-8 h-8 bg-indigo-800/50 rounded-lg flex items-center justify-center">
+                        <span className="text-indigo-400">📋</span>
                       </div>
-                      <h3 className="font-semibold text-gray-800">Status</h3>
+                      <h3 className="font-semibold text-white">Status</h3>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-lg">{isClaimed ? '✅' : '🟡'}</span>
-                      <span className="font-semibold text-lg">
+                      <span className="font-semibold text-lg text-white">
                         {isClaimed ? 'Entry Allowed' : 'Ready to Claim'}
                       </span>
                     </div>
@@ -544,12 +543,12 @@ function VerifyTicketContent() {
                 {/* Attributes */}
                 {ticketData.metadata.attributes && ticketData.metadata.attributes.length > 0 && (
                   <div className="mb-8">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Ticket Details</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">Ticket Details</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {ticketData.metadata.attributes.map((attr, index) => (
-                        <div key={index} className="p-3 bg-gray-50 rounded-lg border">
-                          <p className="text-xs text-gray-500 uppercase font-medium">{attr.trait_type}</p>
-                          <p className="text-sm font-semibold text-gray-800">{attr.value}</p>
+                        <div key={index} className="p-3 bg-neutral-800 rounded-lg border border-neutral-600">
+                          <p className="text-xs text-neutral-400 uppercase font-medium">{attr.trait_type}</p>
+                          <p className="text-sm font-semibold text-white">{attr.value}</p>
                         </div>
                       ))}
                     </div>
@@ -563,11 +562,10 @@ function VerifyTicketContent() {
                     whileTap={{ scale: 0.98 }}
                     onClick={handleClaim}
                     disabled={isClaimLoading}
-                    className={`w-full py-4 px-6 rounded-xl font-semibold text-white text-lg transition-all duration-300 ${
-                      isClaimLoading
-                        ? 'bg-gray-400 cursor-not-allowed'
+                    className={`w-full py-4 px-6 rounded-xl font-semibold text-white text-lg transition-all duration-300 ${isClaimLoading
+                        ? 'bg-neutral-600 cursor-not-allowed'
                         : 'bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 hover:shadow-xl shadow-lg'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-center space-x-3">
                       {isClaimLoading && (
@@ -579,14 +577,14 @@ function VerifyTicketContent() {
                 )}
 
                 {/* Verification Badge */}
-                <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200">
+                <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-xl border border-green-600/50">
                   <div className="flex items-center justify-center gap-3">
-                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-green-600 font-bold">✓</span>
+                    <div className="w-8 h-8 bg-green-800/50 rounded-full flex items-center justify-center">
+                      <span className="text-green-400 font-bold">✓</span>
                     </div>
                     <div className="text-center">
-                      <p className="font-semibold text-green-800">Verified NFT Ticket</p>
-                      <p className="text-sm text-green-600">Blockchain authenticated on Ethereum Sepolia</p>
+                      <p className="font-semibold text-green-300">Verified NFT Ticket</p>
+                      <p className="text-sm text-green-400">Blockchain authenticated on Ethereum Sepolia</p>
                     </div>
                   </div>
                 </div>
@@ -602,8 +600,8 @@ function VerifyTicketContent() {
             animate={{ opacity: 1 }}
             className="text-center py-12"
           >
-            <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading ticket information...</p>
+            <div className="w-16 h-16 border-4 border-neutral-600 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-neutral-400">Loading ticket information...</p>
           </motion.div>
         )}
 
@@ -614,11 +612,11 @@ function VerifyTicketContent() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-16"
           >
-            <div className="w-24 h-24 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
+            <div className="w-24 h-24 bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-purple-600/30">
               <span className="text-4xl">🎫</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Ready to Verify</h2>
-            <p className="text-gray-600 max-w-md mx-auto mb-6">
+            <h2 className="text-2xl font-bold text-white mb-4">Ready to Verify</h2>
+            <p className="text-neutral-400 max-w-md mx-auto mb-6">
               Enter a token ID or scan a QR code to verify your NFT ticket.
             </p>
             <button
@@ -638,10 +636,10 @@ export default function VerifyTicketPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 flex items-center justify-center">
+        <div className="min-h-screen bg-black flex items-center justify-center">
           <div className="text-center">
-            <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading verification system...</p>
+            <div className="w-16 h-16 border-4 border-neutral-600 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-neutral-400">Loading verification system...</p>
           </div>
         </div>
       }

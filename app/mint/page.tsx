@@ -47,11 +47,11 @@ export default function MintPage() {
         if (!eventId) {
           setError('No event ID provided');
           setLoading(false);
-          return; 
+          return;
         }
 
         const response = await fetch(`/api/events/${eventId}`);
-        
+
         if (!response.ok) {
           if (response.status === 404) {
             setNotFound(true);
@@ -66,7 +66,7 @@ export default function MintPage() {
         setEventData(event);
 
         // Format the image URL if it's IPFS
-        const imageUrl = event.image?.startsWith('ipfs://') 
+        const imageUrl = event.image?.startsWith('ipfs://')
           ? event.image.replace('ipfs://', 'https://ipfs.io/ipfs/')
           : event.image;
 
@@ -108,9 +108,14 @@ export default function MintPage() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-6"
+      className="min-h-screen bg-black flex items-center justify-center p-6 relative"
     >
-      <div className="text-center">
+      {/* Dark background decorative elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/20 via-neutral-800/10 to-neutral-700/20"></div>
+      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
+
+      <div className="text-center relative z-10">
         <motion.div
           className="text-6xl mb-6"
           animate={{
@@ -126,7 +131,7 @@ export default function MintPage() {
           🎫
         </motion.div>
         <motion.h2
-          className="text-2xl font-bold text-gray-700 mb-4"
+          className="text-2xl font-bold text-white mb-4"
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
@@ -158,10 +163,15 @@ export default function MintPage() {
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="min-h-screen bg-gradient-to-br from-red-50 via-rose-50 to-pink-50 flex items-center justify-center p-6"
+      className="min-h-screen bg-black flex items-center justify-center p-6 relative"
     >
+      {/* Dark background decorative elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/20 via-neutral-800/10 to-neutral-700/20"></div>
+      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-red-500/10 to-rose-500/10 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-full blur-2xl"></div>
+
       <motion.div
-        className="text-center bg-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 max-w-md"
+        className="text-center bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-neutral-700/40 max-w-md relative z-10"
         whileHover={{ scale: 1.02 }}
       >
         <motion.div
@@ -174,8 +184,8 @@ export default function MintPage() {
         >
           {icon}
         </motion.div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Oops!</h2>
-        <p className="text-gray-600 mb-6">{message}</p>
+        <h2 className="text-2xl font-bold text-white mb-4">Oops!</h2>
+        <p className="text-neutral-300 mb-6">{message}</p>
         <motion.button
           className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
           onClick={() => window.history.back()}
@@ -199,23 +209,25 @@ export default function MintPage() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative"
+        className="min-h-screen bg-black pt-20 relative"
       >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
-      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
+        {/* Dark background decorative elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/20 via-neutral-800/10 to-neutral-700/20"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-400/5 to-indigo-400/5 rounded-full blur-3xl"></div>
+
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/80 backdrop-blur-xl border-b border-white/30 sticky top-0 z-10"
+          className=" backdrop-blur-xl border-b border-neutral-700/50 sticky top-0 z-10"
         >
           <div className="max-w-7xl mx-auto px-6 py-6">
             <div className="flex items-center justify-between flex-col gap-4 md:gap-1 md:flex-row">
               <div className="flex items-center gap-4">
                 <motion.button
-                  className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300"
+                  className="flex items-center gap-2 text-neutral-300 hover:text-white transition-colors duration-300"
                   onClick={() => window.history.back()}
                   whileHover={{ x: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -228,7 +240,7 @@ export default function MintPage() {
                   </motion.span>
                   Back to Events
                 </motion.button>
-                <div className="w-px h-6 bg-gray-300"></div>
+                <div className="w-px h-6 bg-neutral-600"></div>
                 <div className="flex items-center gap-3">
                   <motion.div
                     className="text-2xl"
@@ -238,10 +250,10 @@ export default function MintPage() {
                     🎫
                   </motion.div>
                   <div>
-                    <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
                       Mint Your Ticket
                     </h1>
-                    <p className="text-sm text-gray-600">Secure your spot on the blockchain</p>
+                    <p className="text-sm text-neutral-400">Secure your spot on the blockchain</p>
                   </div>
                 </div>
               </div>
@@ -266,11 +278,10 @@ export default function MintPage() {
                     </motion.div>
                   ) : (
                     <motion.div
-                      className={`px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg ${
-                        availableTickets <= 5
+                      className={`px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg ${availableTickets <= 5
                           ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white'
                           : 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white'
-                      }`}
+                        }`}
                       whileHover={{ scale: 1.05 }}
                     >
                       🎟️ {availableTickets} tickets left
@@ -285,7 +296,7 @@ export default function MintPage() {
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
+
             {/* Event Info Card */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -293,9 +304,9 @@ export default function MintPage() {
               transition={{ delay: 0.2 }}
               className="lg:col-span-1"
             >
-              <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl sticky top-32 border-2  hover:border-purple-700 border-t-indigo-600 border-purple-600 border-b-purple-600">
+              <div className="bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 backdrop-blur-xl rounded-2xl p-6 shadow-2xl sticky top-32 border border-neutral-700/40 hover:border-purple-500/50 transition-all duration-300">
                 {/* Event Image */}
-                <div className="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50">
+                <div className="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-neutral-800 to-neutral-700">
                   {formData.bannerImage ? (
                     <motion.img
                       src={formData.bannerImage}
@@ -305,8 +316,8 @@ export default function MintPage() {
                       transition={{ duration: 0.3 }}
                     />
                   ) : (
-                    <div className="w-full h-48 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
-                      <div className="text-center text-indigo-400">
+                    <div className="w-full h-48 bg-gradient-to-br from-neutral-800 to-neutral-700 flex items-center justify-center">
+                      <div className="text-center text-neutral-400">
                         <div className="text-4xl mb-2">🎪</div>
                         <div className="text-sm font-medium">Event Image</div>
                       </div>
@@ -315,13 +326,13 @@ export default function MintPage() {
                 </div>
 
                 {/* Event Details */}
-                <div className="space-y-4 ">
+                <div className="space-y-4">
                   <div>
-                    <h2 className="text-xl font-bold text-gray-800 mb-2">
+                    <h2 className="text-xl font-bold text-white mb-2">
                       {formData.eventName}
                     </h2>
                     {eventData?.description && (
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="text-neutral-300 text-sm leading-relaxed">
                         {eventData.description}
                       </p>
                     )}
@@ -329,13 +340,13 @@ export default function MintPage() {
 
                   <div className="space-y-3">
                     <motion.div
-                      className="flex items-center gap-3 p-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl"
+                      className="flex items-center gap-3 p-3 bg-gradient-to-r from-neutral-800/50 to-neutral-700/50 rounded-xl border border-neutral-600/30"
                       whileHover={{ scale: 1.02 }}
                     >
-                      <span className="text-indigo-500 text-lg">📅</span>
+                      <span className="text-indigo-400 text-lg">📅</span>
                       <div>
-                        <div className="text-sm font-medium text-gray-800">Event Date</div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm font-medium text-white">Event Date</div>
+                        <div className="text-sm text-neutral-300">
                           {new Date(formData.eventDate).toLocaleDateString('en-US', {
                             weekday: 'long',
                             year: 'numeric',
@@ -347,36 +358,36 @@ export default function MintPage() {
                     </motion.div>
 
                     <motion.div
-                      className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl"
+                      className="flex items-center gap-3 p-3 bg-gradient-to-r from-neutral-800/50 to-neutral-700/50 rounded-xl border border-neutral-600/30"
                       whileHover={{ scale: 1.02 }}
                     >
-                      <span className="text-purple-500 text-lg">📍</span>
+                      <span className="text-purple-400 text-lg">📍</span>
                       <div>
-                        <div className="text-sm font-medium text-gray-800">Venue</div>
-                        <div className="text-sm text-gray-600">{formData.venue}</div>
+                        <div className="text-sm font-medium text-white">Venue</div>
+                        <div className="text-sm text-neutral-300">{formData.venue}</div>
                       </div>
                     </motion.div>
 
                     <motion.div
-                      className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl"
+                      className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-xl border border-green-600/30"
                       whileHover={{ scale: 1.02 }}
                     >
-                      <span className="text-green-500 text-lg">💰</span>
+                      <span className="text-green-400 text-lg">💰</span>
                       <div>
-                        <div className="text-sm font-medium text-gray-800">Ticket Price</div>
-                        <div className="text-lg font-bold text-green-600">{formData.price} ETH</div>
+                        <div className="text-sm font-medium text-white">Ticket Price</div>
+                        <div className="text-lg font-bold text-green-300">{formData.price} ETH</div>
                       </div>
                     </motion.div>
 
                     {eventData && (
                       <motion.div
-                        className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl"
+                        className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-900/30 to-indigo-900/30 rounded-xl border border-blue-600/30"
                         whileHover={{ scale: 1.02 }}
                       >
-                        <span className="text-blue-500 text-lg">🎟️</span>
+                        <span className="text-blue-400 text-lg">🎟️</span>
                         <div>
-                          <div className="text-sm font-medium text-gray-800">Availability</div>
-                          <div className="text-sm text-gray-600">
+                          <div className="text-sm font-medium text-white">Availability</div>
+                          <div className="text-sm text-neutral-300">
                             {eventData.mintedCount} minted / {eventData.maxTickets} total
                           </div>
                         </div>
@@ -394,7 +405,7 @@ export default function MintPage() {
               transition={{ delay: 0.4 }}
               className="lg:col-span-2"
             >
-              <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30">
+              <div className="bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-neutral-700/40">
                 <div className="flex items-center gap-3 mb-6">
                   <motion.div
                     className="text-3xl"
@@ -404,8 +415,8 @@ export default function MintPage() {
                     ⚡
                   </motion.div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-800">Mint Your NFT Ticket</h2>
-                    <p className="text-gray-600">Fill in your details to mint your blockchain ticket</p>
+                    <h2 className="text-2xl font-bold text-white">Mint Your NFT Ticket</h2>
+                    <p className="text-neutral-300">Fill in your details to mint your blockchain ticket</p>
                   </div>
                 </div>
 
@@ -413,24 +424,24 @@ export default function MintPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center py-12 bg-gradient-to-r from-red-50 to-rose-50 rounded-xl border border-red-200"
+                    className="text-center py-12 bg-gradient-to-r from-red-900/30 to-rose-900/30 rounded-xl border border-red-600/30"
                   >
                     <div className="text-4xl mb-4">⏸️</div>
-                    <h3 className="text-xl font-bold text-red-700 mb-2">Event Inactive</h3>
-                    <p className="text-red-600">This event is currently not accepting new ticket mints.</p>
+                    <h3 className="text-xl font-bold text-red-300 mb-2">Event Inactive</h3>
+                    <p className="text-red-400">This event is currently not accepting new ticket mints.</p>
                   </motion.div>
                 ) : isFullyBooked ? (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center py-12 bg-gradient-to-r from-red-50 to-rose-50 rounded-xl border border-red-200"
+                    className="text-center py-12 bg-gradient-to-r from-red-900/30 to-rose-900/30 rounded-xl border border-red-600/30"
                   >
                     <div className="text-4xl mb-4">🎫</div>
-                    <h3 className="text-xl font-bold text-red-700 mb-2">Event Sold Out</h3>
-                    <p className="text-red-600">All tickets for this event have been minted.</p>
+                    <h3 className="text-xl font-bold text-red-300 mb-2">Event Sold Out</h3>
+                    <p className="text-red-400">All tickets for this event have been minted.</p>
                   </motion.div>
                 ) : (
-                  <MintFormTicket formData={formData} setFormData={setFormData}  />
+                  <MintFormTicket formData={formData} setFormData={setFormData} />
                   // <div>Mint Form</div>
                 )}
               </div>
