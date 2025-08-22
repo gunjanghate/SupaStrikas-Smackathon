@@ -1,3 +1,5 @@
+
+
 'use client';
 
 import * as React from "react";
@@ -42,6 +44,9 @@ const YourTicketPage = () => {
   const [txStatus, setTxStatus] = useState("");
   const [showQR, setShowQR] = useState<Record<number, boolean>>({});
   const [claimingId, setClaimingId] = useState<number | null>(null);
+    const [resaleId, setResaleId] = useState<number | null>(null);
+  const [resalePrice, setResalePrice] = useState<string>("");
+  const [resaleStatus, setResaleStatus] = useState<string>("");
 
   // Sample claimed tickets data for demonstration
   const sampleClaimedTickets = [
@@ -66,6 +71,32 @@ const YourTicketPage = () => {
       }
     }
   ];
+    // List ticket for resale
+  const listTicketForResale = async (tokenId: number, price: string) => {
+    try {
+      setResaleStatus("Listing for resale...");
+      if (!window.ethereum) throw new Error("MetaMask not found.");
+      if (!price || isNaN(Number(price)) || Number(price) <= 0) throw new Error("Invalid price");
+
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const contract = getTicketContract(signer);
+
+      // Call contract method
+      const tx = await contract.listTicketForResale(tokenId, ethers.parseEther(price));
+      await tx.wait();
+      setResaleStatus(`✅ Ticket listed for resale! Tx: ${tx.hash.slice(0, 10)}...`);
+      setTimeout(() => {
+        setResaleId(null);
+        setResalePrice("");
+        setResaleStatus("");
+        window.location.reload();
+      }, 1500);
+    } catch (err: any) {
+      console.error("Resale failed:", err);
+      setResaleStatus(`❌ Failed: ${err?.message || "Unknown error"}`);
+    }
+  };
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -431,7 +462,7 @@ const YourTicketPage = () => {
                             </motion.button>
                           </div>
                         ) : (
-                          // Unclaimed ticket - show QR, Transfer, and Claim buttons
+                          // Unclaimed ticket - show QR, Transfer, Claim, and Resale buttons
                           <div className="flex gap-2">
                             <motion.button
                               whileHover={{ scale: 1.02 }}
@@ -449,8 +480,79 @@ const YourTicketPage = () => {
                             >
                               Transfer
                             </motion.button>
+                            <motion.button
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => setResaleId(ticket.tokenId)}
+                              className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 text-white py-2.5 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                            >
+                              Set For Sale
+                            </motion.button>
                           </div>
                         )}
+                        {/* Resale Section */}
+                        <AnimatePresence>
+                          {resaleId === ticket.tokenId && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="bg-gradient-to-br from-green-900/50 to-emerald-900/50 rounded-xl p-4 border border-green-600/30 space-y-3"
+                            >
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-green-400">💸</span>
+                                <span className="font-semibold text-green-300">List Ticket For Resale</span>
+                              </div>
+                              <input
+                                type="number"
+                                min="0"
+                                step="any"
+                                placeholder="Enter resale price in ETH"
+                                value={resalePrice}
+                                onChange={e => setResalePrice(e.target.value)}
+                                className="w-full p-3 border-2 border-green-600 bg-neutral-800 text-white rounded-lg focus:border-green-400 focus:outline-none transition-colors duration-200 text-sm font-mono placeholder-neutral-400"
+                              />
+                              <div className="flex gap-2">
+                                <motion.button
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  onClick={() => listTicketForResale(ticket.tokenId, resalePrice)}
+                                  disabled={!resalePrice.trim() || isNaN(Number(resalePrice)) || Number(resalePrice) <= 0}
+                                  className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 text-white py-2.5 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                  Confirm Sale
+                                </motion.button>
+                                <motion.button
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  onClick={() => {
+                                    setResaleId(null);
+                                    setResalePrice("");
+                                    setResaleStatus("");
+                                  }}
+                                  className="px-4 py-2.5 bg-neutral-700 text-neutral-200 rounded-lg font-semibold hover:bg-neutral-600 transition-colors duration-200"
+                                >
+                                  Cancel
+                                </motion.button>
+                              </div>
+                              {resaleStatus && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: -10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  className={`p-3 rounded-lg text-sm font-medium ${resaleStatus.includes('✅')
+                                    ? 'bg-green-900/50 text-green-300 border border-green-600/30'
+                                    : resaleStatus.includes('❌')
+                                      ? 'bg-red-900/50 text-red-300 border border-red-600/30'
+                                      : 'bg-blue-900/50 text-blue-300 border border-blue-600/30'
+                                    }`}
+                                >
+                                  {resaleStatus}
+                                </motion.div>
+                              )}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
 
                         {/* Claim POA Button - only show when ticket is claimed */}
                         {ticket.isClaimed && (

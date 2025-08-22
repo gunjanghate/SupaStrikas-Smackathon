@@ -93,6 +93,7 @@ contract TicketNFT is ERC721URIStorage, Ownable {
 
     event TicketMinted(uint256 indexed tokenId, address indexed to, uint256 price);
     event TicketClaimed(uint256 indexed tokenId, address indexed by);
+    
     event TicketListedForResale(uint256 indexed tokenId, uint256 price);
     event TicketResold(uint256 indexed tokenId, address indexed from, address indexed to, uint256 price);
 
