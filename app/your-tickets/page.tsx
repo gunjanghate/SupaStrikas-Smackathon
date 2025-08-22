@@ -244,7 +244,7 @@ const YourTicketPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-black p-6 relative">
+    <div className="min-h-screen pt-20 bg-black p-6 relative">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
       <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>

@@ -6,7 +6,7 @@ import { useWeb3 } from '@/context/Web3Context';
 import Image from 'next/image';
 import { getTicketContract } from '@/lib/contract';
 import { ethers } from 'ethers';
-
+import axios from 'axios';
 type ListedTicket = {
   tokenId: number;
   resalePrice: string;
@@ -59,12 +59,24 @@ export default function MarketplacePage() {
       const tx = await contract.buyResaleTicket(tokenId, { value: priceWei });
       await tx.wait();
 
-      setTxStatus(`✅ Ticket purchased! Tx: ${tx.hash.slice(0, 10)}...`);
+      try {
+        const res = await axios.patch(`/api/tickets/${tokenId}/bought`, {
+          newOwnerWallet: address,
+          newtxnHash: tx.hash,
+        });
+        if (res.status !== 200) throw new Error('Failed to update ticket ownership');
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        setError(errorMessage);
+        setTxStatus(` Buy failed: ${errorMessage}`);
+      }
+
+      setTxStatus(` Ticket purchased! Tx: ${tx.hash.slice(0, 10)}...`);
       setBuyingId(null);
       setTimeout(() => window.location.reload(), 1500);
     } catch (err: any) {
       setError(err?.message || 'Unknown error');
-      setTxStatus(`❌ Buy failed: ${err?.message || 'Unknown error'}`);
+      setTxStatus(` Buy failed: ${err?.message || 'Unknown error'}`);
     }
   };
 
