@@ -23,7 +23,7 @@ contract TicketNFT is ERC721URIStorage, Ownable {
 
     constructor(
         address initialOwner
-    ) ERC721("AccesslyTicket", "ACT") Ownable(initialOwner) {}
+    ) ERC721("MintMyTicketTicket", "ACT") Ownable(initialOwner) {}
 
     function mintTicket(
         address to,

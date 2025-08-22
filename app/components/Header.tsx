@@ -35,7 +35,7 @@ const Header = () => {
                   router.push("/")
                 }}
                 className="text-2xl font-semibold font-serif bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic cursor-pointer">
-                Accessly
+                MintMyTicket
               </h1>
               <p className="text-xs text-gray-500">NFT Ticketing</p>
             </div>
@@ -59,8 +59,8 @@ const Header = () => {
             </Link>
           </motion.nav>
 
-            {/* Mobile Hamburger */}
-            <div className="md:hidden flex items-center">
+          {/* Mobile Hamburger */}
+          <div className="md:hidden flex items-center">
             <button
               aria-label="Open Menu"
               onClick={() => setMobileNavOpen(!mobileNavOpen)}
@@ -68,27 +68,27 @@ const Header = () => {
             >
               {mobileNavOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-            </div>
+          </div>
 
-            {/* Wallet Button (Always visible) */}
-            <motion.div
+          {/* Wallet Button (Always visible) */}
+          <motion.div
             initial={{ x: 20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
             className=""
-            >
+          >
             <WalletButton />
-            </motion.div>
-          </div>
+          </motion.div>
+        </div>
 
-          {/* Mobile Navigation Drawer */}
-          {mobileNavOpen && (
-            <motion.nav
+        {/* Mobile Navigation Drawer */}
+        {mobileNavOpen && (
+          <motion.nav
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             className="md:hidden flex flex-col space-y-2 mt-2 pb-4"
-            >
+          >
             <Link href="/events" className="text-gray-800 hover:text-indigo-600 font-medium text-base px-2 py-1" onClick={() => setMobileNavOpen(false)}>
               Events
             </Link>
@@ -98,8 +98,8 @@ const Header = () => {
             <Link href="/create-event" className="text-gray-800 hover:text-indigo-600 font-medium text-base px-2 py-1" onClick={() => setMobileNavOpen(false)}>
               Create Event
             </Link>
-            </motion.nav>
-          )}
+          </motion.nav>
+        )}
       </header>
     </motion.div>
   );

@@ -109,7 +109,7 @@ const HeroSection = () => {
           {/* Badge */}
           <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-indigo-200 rounded-full mb-4 shadow-lg">
             <Sparkles className="w-4 h-4 text-indigo-600" />
-            <span className="text-sm font-medium text-indigo-700">The Future of Event Ticketing</span>
+            <span className="text-sm font-medium font-sans text-indigo-700">The Future of Event Ticketing</span>
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           </motion.div>
 
@@ -119,7 +119,7 @@ const HeroSection = () => {
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight flex flex-col"
           >
             <span className={`font-serif ${heroFont.variable} bg-gradient-to-br from-indigo-600  to-purple-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
-              Accessly
+              MintMyTicket
             </span>
 
             <span className="bg-gradient-to-br pb-3 bg-clip-text text-transparent from-neutral-500 to-neutral-950 font-bold text-4xl md:text-5xl lg:text-6xl">
@@ -249,7 +249,7 @@ const HeroSection = () => {
               >
                 <div className="flex items-center space-x-3 mb-4">
                   <CheckCircle className="w-6 h-6 text-green-600" />
-                  <h4 className="text-lg font-semibold text-gray-900">Accessly Solution</h4>
+                  <h4 className="text-lg font-semibold text-gray-900">MintMyTicket Solution</h4>
                 </div>
                 <p className="text-gray-700 leading-relaxed">
                   By minting tickets as NFTs and leveraging blockchain technology, we ensure

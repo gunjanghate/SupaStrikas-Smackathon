@@ -1,7 +1,7 @@
 export const events = [
   {
     id: 1,
-    eventName: "Accessly Launch Party",
+    eventName: "MintMyTicket Launch Party",
     date: "2025-06-25",
     venue: "Bangalore",
     price: "0.01",

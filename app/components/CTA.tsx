@@ -2,7 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 const CTA = () => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <div className="relative bg-transparent py-16 px-6 overflow-hidden">
       {/* Background Elements */}
@@ -10,7 +10,7 @@ const CTA = () => {
       <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
       <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
-      
+
       <div className="relative max-w-6xl mx-auto text-center">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-blue-200/50 rounded-full px-4 py-2 mb-8 shadow-lg">
@@ -29,15 +29,15 @@ const CTA = () => {
         </h2>
 
         <p className="text-xl md:text-xl text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed">
-          Join thousands of event creators who trust Accessly for secure, 
+          Join thousands of event creators who trust MintMyTicket for secure,
           decentralized ticketing powered by blockchain technology.
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-          <button onClick={()=>{
+          <button onClick={() => {
             router.push("/create-event")
-          }}  className="group relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 min-w-[200px] cursor-pointer hover:animate-bounce hover:scale-110">
+          }} className="group relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-500 min-w-[200px] cursor-pointer hover:animate-bounce hover:scale-110">
             <span className="relative z-10 flex items-center justify-center gap-2">
               Create Event
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

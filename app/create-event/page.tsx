@@ -38,7 +38,7 @@ const Page = () => {
 
             {/* Description */}
             <p className="text-gray-600 mb-8 leading-relaxed">
-              To create events on Accessly, you need to connect your Web3 wallet first.
+              To create events on MintMyTicket, you need to connect your Web3 wallet first.
               This ensures secure event management on the blockchain.
             </p>
 
@@ -163,11 +163,11 @@ const Page = () => {
       {/* Content */}
       <div className="relative z-10 p-6">
         <MintTicketForm />
-                      {/* <ShareToX
-                title="🎉 New Event Created on Accessly!"
-                content="Join us at the 'Accessly Launch Event' on June 25 in Bangalore. Mint your ticket now and be part of the future of decentralized ticketing!"
-                hashtags={["Accessly", "NFTtickets", "Web3", "ProofOfAttendance"]}
-                url="https://accessly-self.vercel.app/events"
+        {/* <ShareToX
+                title="🎉 New Event Created on MintMyTicket!"
+                content="Join us at the 'MintMyTicket Launch Event' on June 25 in Bangalore. Mint your ticket now and be part of the future of decentralized ticketing!"
+                hashtags={["MintMyTicket", "NFTtickets", "Web3", "ProofOfAttendance"]}
+                url="https://MintMyTicket-self.vercel.app/events"
               /> */}
       </div>
     </div>

@@ -27,10 +27,10 @@ const NotFound = () => {
             >
               404
             </motion.h1>
-            
+
             {/* Floating elements around 404 */}
             <motion.div
-              animate={{ 
+              animate={{
                 y: [-10, 10, -10],
                 rotate: [0, 5, -5, 0]
               }}
@@ -39,9 +39,9 @@ const NotFound = () => {
             >
               🎪
             </motion.div>
-            
+
             <motion.div
-              animate={{ 
+              animate={{
                 y: [10, -10, 10],
                 rotate: [0, -5, 5, 0]
               }}
@@ -50,9 +50,9 @@ const NotFound = () => {
             >
               🎫
             </motion.div>
-            
+
             <motion.div
-              animate={{ 
+              animate={{
                 y: [-5, 15, -5],
                 rotate: [0, 10, -10, 0]
               }}
@@ -61,9 +61,9 @@ const NotFound = () => {
             >
               🔗
             </motion.div>
-            
+
             <motion.div
-              animate={{ 
+              animate={{
                 y: [15, -5, 15],
                 rotate: [0, -8, 8, 0]
               }}
@@ -100,7 +100,7 @@ const NotFound = () => {
             <h3 className="text-xl font-semibold text-gray-800 mb-6">
               🔍 What you can do instead:
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start space-x-3">
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -111,7 +111,7 @@ const NotFound = () => {
                   <p className="text-sm text-gray-600">Start fresh from our main page</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-purple-600 text-sm">🎪</span>
@@ -121,7 +121,7 @@ const NotFound = () => {
                   <p className="text-sm text-gray-600">Discover amazing Web3 events</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-green-600 text-sm">🎫</span>
@@ -131,7 +131,7 @@ const NotFound = () => {
                   <p className="text-sm text-gray-600">Check your NFT tickets</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <div className="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-pink-600 text-sm">➕</span>
@@ -160,7 +160,7 @@ const NotFound = () => {
           >
             ← Go Back
           </motion.button>
-          
+
           <motion.a
             href="/"
             whileHover={{ scale: 1.05, y: -2 }}
@@ -169,7 +169,7 @@ const NotFound = () => {
           >
             🏠 Home Page
           </motion.a>
-          
+
           <motion.a
             href="/events"
             whileHover={{ scale: 1.05, y: -2 }}
@@ -189,7 +189,7 @@ const NotFound = () => {
         >
           <p className="text-gray-500 text-sm">
             Lost in the metaverse? Our{' '}
-            <span className="font-medium text-purple-600">Accessly</span>{' '}
+            <span className="font-medium text-purple-600">MintMyTicket</span>{' '}
             team is here to help you navigate the Web3 event space! 🚀
           </p>
         </motion.div>

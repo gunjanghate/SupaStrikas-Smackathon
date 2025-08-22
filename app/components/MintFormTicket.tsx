@@ -436,10 +436,10 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
                 </div>
                 {isSuccess && (
                   <ShareToX
-                    title="🎟️ Just Minted My NFT Ticket on Accessly!"
-                    content={`I'm attending '${xData.eventName}' on ${xData.date} at ${xData.venue} 🎉 My seat: ${xData.seatNumber}. Mint yours now on Accessly — powered by Web3!`}
-                    hashtags={["Accessly", "NFTtickets", "Web3Events", "ProofOfAttendance", "Blockchain"]}
-                    url="https://accessly-self.vercel.app/events"
+                    title="🎟️ Just Minted My NFT Ticket on MintMyTicket!"
+                    content={`I'm attending '${xData.eventName}' on ${xData.date} at ${xData.venue} 🎉 My seat: ${xData.seatNumber}. Mint yours now on MintMyTicket — powered by Web3!`}
+                    hashtags={["MintMyTicket", "NFTtickets", "Web3Events", "ProofOfAttendance", "Blockchain"]}
+                    url="https://MintMyTicket-self.vercel.app/events"
                   />
                 )}
               </div>

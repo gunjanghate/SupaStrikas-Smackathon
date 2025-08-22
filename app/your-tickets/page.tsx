@@ -134,7 +134,7 @@ const YourTicketPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
       <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
       <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
@@ -344,7 +344,7 @@ const YourTicketPage = () => {
                                 </p>
                                 <div className="bg-white p-3 rounded-lg inline-block shadow-sm">
                                   <QRCodeCanvas
-                                    value={`https://accessly-self.vercel.app/verify?tokenId=${ticket.tokenId}&owner=${ticket.ownerWallet}`}
+                                    value={`https://MintMyTicket-self.vercel.app/verify?tokenId=${ticket.tokenId}&owner=${ticket.ownerWallet}`}
                                     size={140}
                                     bgColor="#ffffff"
                                     fgColor="#000000"
@@ -418,10 +418,10 @@ const YourTicketPage = () => {
                                   initial={{ opacity: 0, y: -10 }}
                                   animate={{ opacity: 1, y: 0 }}
                                   className={`p-3 rounded-lg text-sm font-medium ${txStatus.includes('✅')
-                                      ? 'bg-green-100 text-green-800 border border-green-200'
-                                      : txStatus.includes('❌')
-                                        ? 'bg-red-100 text-red-800 border border-red-200'
-                                        : 'bg-blue-100 text-blue-800 border border-blue-200'
+                                    ? 'bg-green-100 text-green-800 border border-green-200'
+                                    : txStatus.includes('❌')
+                                      ? 'bg-red-100 text-red-800 border border-red-200'
+                                      : 'bg-blue-100 text-blue-800 border border-blue-200'
                                     }`}
                                 >
                                   {txStatus}

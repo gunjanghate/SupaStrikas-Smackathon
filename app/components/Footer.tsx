@@ -1,9 +1,9 @@
 "use client"
 import * as React from 'react';
-import { Ticket, Shield, Zap, Github, Twitter,Mail, Globe, QrCode } from 'lucide-react';
+import { Ticket, Shield, Zap, Github, Twitter, Mail, Globe, QrCode } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 const Footer = () => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <footer className="bg-gradient-to-br from-gray-50 via-purple-50 to-pink-50 text-gray-800 relative overflow-hidden border-t border-gray-200">
       {/* Subtle background elements */}
@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          
+
           {/* Brand Section */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
@@ -26,11 +26,11 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-3xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic cursor-pointer font-serif"
-                onClick={()=>{
+                  onClick={() => {
                     router.push("/")
-                }}>
+                  }}>
 
-                  Accessly
+                  MintMyTicket
                 </h3>
                 <p className="text-sm text-gray-500 font-medium">NFT Ticketing</p>
               </div>
@@ -42,7 +42,7 @@ const Footer = () => {
               <a href="https://x.com/gunjanghate11" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
                 <Twitter className="w-5 h-5 text-gray-600 hover:text-purple-600" />
               </a>
-              <a href="https://github.com/gunjanghate/Accessly" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
+              <a href="https://github.com/gunjanghate/MintMyTicket" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
                 <Github className="w-5 h-5 text-gray-600 hover:text-purple-600" />
               </a>
               <a href="mailto:ghategunjan@gmail.com" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
@@ -143,7 +143,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-gray-500 text-sm font-medium">
-            © 2025 Accessly. Built on Ethereum. Powered by Web3.
+            © 2025 MintMyTicket. Built on Ethereum. Powered by Web3.
           </div>
 
         </div>
