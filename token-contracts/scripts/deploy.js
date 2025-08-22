@@ -3,7 +3,7 @@ const hre = require("hardhat");
 async function main() {
     const [deployer] = await hre.ethers.getSigners(); 
   const TicketNFT = await hre.ethers.getContractFactory("TicketNFT");
-  const contract = await TicketNFT.deploy(deployer.address);
+  const contract = await TicketNFT.deploy(deployer.address,10);
 
   await contract.waitForDeployment();
 

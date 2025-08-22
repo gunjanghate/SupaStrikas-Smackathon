@@ -93,9 +93,10 @@ contract TicketNFT is ERC721URIStorage, Ownable {
 
     event TicketMinted(uint256 indexed tokenId, address indexed to, uint256 price);
     event TicketClaimed(uint256 indexed tokenId, address indexed by);
-    
+
     event TicketListedForResale(uint256 indexed tokenId, uint256 price);
     event TicketResold(uint256 indexed tokenId, address indexed from, address indexed to, uint256 price);
+    event TicketTransferred(uint256 indexed tokenId, address indexed from, address indexed to);
 
     constructor(
         address initialOwner,
@@ -184,6 +185,27 @@ function claimTicket(uint256 tokenId) external onlyOwner {
         _transfer(seller, msg.sender, tokenId);
 
         emit TicketResold(tokenId, seller, msg.sender, price);
+    }
+
+    /// @notice Transfer a ticket to a specified address
+    /// @param to The address to transfer the ticket to
+    /// @param tokenId The ID of the ticket to transfer
+    function transferTicket(address to, uint256 tokenId) external {
+        require(_ownerOf(tokenId) != address(0), "Ticket does not exist");
+        require(msg.sender == ownerOf(tokenId), "Not ticket owner");
+        require(to != address(0), "Cannot transfer to zero address");
+        require(!isClaimed[tokenId], "Cannot transfer claimed ticket");
+
+        // Clear resale listing if it exists
+        if (resalePrice[tokenId] > 0) {
+            resalePrice[tokenId] = 0;
+            approve(address(0), tokenId); // Clear any existing approval
+        }
+
+        // Transfer the NFT
+        _transfer(msg.sender, to, tokenId);
+
+        emit TicketTransferred(tokenId, msg.sender, to);
     }
 
     /// @notice Get current resale price for a ticket
