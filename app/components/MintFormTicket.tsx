@@ -148,7 +148,10 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
         formData.venue,
         formData.seatNumber,
         priceWei,
-        tokenURI
+        tokenURI,
+        {
+          value: priceWei,  // 🔥 ADD THIS LINE - sends ETH with the transaction
+        }
       );
       console.log("✅ Mint transaction submitted:", tx.hash);
 

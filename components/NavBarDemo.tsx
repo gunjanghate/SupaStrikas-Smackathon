@@ -6,6 +6,7 @@ import {
   MobileNav,
   NavbarLogo,
   NavbarButton,
+  NavbarWalletButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
@@ -16,15 +17,15 @@ export default function NavbarDemo() {
   const navItems = [
     {
       name: "Events",
-      link: "#",
+      link: "/events",
     },
     {
       name: "Your Tickets",
-      link: "#",
+      link: "/your-tickets",
     },
     {
       name: "Create Event",
-      link: "#",
+      link: "/create-event",
     },
   ];
 
@@ -38,8 +39,7 @@ export default function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-     
-            <NavbarButton variant="primary">Connect Wallet</NavbarButton>
+            <NavbarWalletButton />
           </div>
         </NavBody>
 
@@ -68,13 +68,7 @@ export default function NavbarDemo() {
               </a>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Connect Wallet
-              </NavbarButton>
+              <NavbarWalletButton />
             </div>
           </MobileNavMenu>
         </MobileNav>
