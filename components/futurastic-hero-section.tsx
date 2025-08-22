@@ -3,7 +3,7 @@ import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { useEffect } from "react";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
- 
+import { WordRotate } from "./magicui/word-rotate";
 import { cn } from "@/lib/utils";
 import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
  
@@ -100,7 +100,7 @@ export const AuroraHero = () => {
 
       <div className="absolute inset-0 z-0">
         <Canvas>
-          <Stars radius={100} count={700} factor={4} fade speed={2} />
+          <Stars radius={100} count={1000} factor={4} fade speed={3} />
         </Canvas>
       </div>
     </motion.section>
