@@ -26,7 +26,7 @@ const EventDashboard = ({ params }: { params: Promise<{ eventId: string }> }) =>
                 console.log('Event data:', data);
 
                 // 🛑 Check if user is event creator
-                if (data.organizerWallet.toLowerCase() !== address.toLowerCase()) {
+                if (!address || data.organizerWallet.toLowerCase() !== address.toLowerCase()) {
                     console.log('Unauthorized: user is not the event organizer');
                     setUnauthorized(true);
                     setLoading(false);
