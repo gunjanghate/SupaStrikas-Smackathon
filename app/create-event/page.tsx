@@ -14,12 +14,11 @@ const Page = () => {
   if (!isConnected) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-indigo-400/5 to-indigo-500/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        </div>
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
 
         {/* Main Content */}
         <div className="relative z-10 max-w-md w-full mx-4">
@@ -79,12 +78,11 @@ const Page = () => {
   if (!isAdmin) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden py-12">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-red-500/10 to-pink-600/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-orange-500/10 to-red-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-pink-400/5 to-red-500/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        </div>
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
 
         {/* Main Content */}
         <div className="relative z-10 max-w-md w-full mx-4">
@@ -154,11 +152,11 @@ const Page = () => {
 
   return (
     <div className="min-h-screen bg-black relative">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/20 via-neutral-800/10 to-neutral-700/20"></div>
-      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-500/10 to-pink-600/10 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-full blur-2xl"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-400/5 to-blue-500/5 rounded-full blur-3xl"></div>
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
 
       {/* Content */}
       <div className="relative z-10 p-6">

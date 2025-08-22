@@ -25,7 +25,7 @@ const Footer = () => {
                 <Ticket className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-3xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic cursor-pointer font-serif"
+                <h3 className="text-3xl bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent  cursor-pointer font-sans"
                   onClick={() => {
                     router.push("/")
                   }}>

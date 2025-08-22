@@ -189,7 +189,7 @@ const NotFound = () => {
         >
           <p className="text-gray-500 text-sm">
             Lost in the metaverse? Our{' '}
-            <span className="font-medium text-purple-600">MintMyTicket</span>{' '}
+            <span className="font-sans font-semibold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">MintMyTicket</span>{' '}
             team is here to help you navigate the Web3 event space! 🚀
           </p>
         </motion.div>

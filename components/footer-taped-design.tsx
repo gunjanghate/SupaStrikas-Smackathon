@@ -16,7 +16,7 @@ export const Component = () => {
           <div className='flex flex-col items-start gap-2'>
           <Link
             href="/"
-            className="flex flex-row font-sans gap-1 items-center justify-start text-2xl font-display font-extrabold text-purple-700"
+            className="flex flex-row  gap-1 items-center justify-start text-2xl font-display bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent"
           >
             
             MintMyTicket

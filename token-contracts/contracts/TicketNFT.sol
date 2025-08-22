@@ -137,20 +137,12 @@ contract TicketNFT is ERC721URIStorage, Ownable {
     }
 
     /// @notice Mark a ticket as claimed (QR scanned)
-    function claimTicket(uint256 tokenId) external {
-        require(_ownerOf(tokenId) != address(0), "Ticket does not exist");
-        require(!isClaimed[tokenId], "Already claimed");
-
-        // Only the ticket owner or contract owner (event organizer) can claim
-        require(
-            msg.sender == ownerOf(tokenId) || msg.sender == owner(),
-            "Not authorized to claim"
-        );
-
-        isClaimed[tokenId] = true;
-
-        emit TicketClaimed(tokenId, msg.sender);
-    }
+function claimTicket(uint256 tokenId) external onlyOwner {
+    require(_ownerOf(tokenId) != address(0), "Ticket does not exist");
+    require(!isClaimed[tokenId], "Already claimed");
+    isClaimed[tokenId] = true;
+    emit TicketClaimed(tokenId, msg.sender);
+}
 
     /// @notice List a ticket for resale
     function listTicketForResale(uint256 tokenId, uint256 price) external {

@@ -236,27 +236,27 @@ export default function CreateEventForm() {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-indigo-200 mb-4"
+      className="bg-gradient-to-r from-neutral-800/50 to-neutral-700/50 p-4 rounded-lg border border-neutral-600/30 mb-4"
     >
       <div className="flex items-center justify-between mb-2">
-        <h4 className="font-semibold text-gray-900">Event Preview</h4>
+        <h4 className="font-semibold text-white">Event Preview</h4>
         <button
           type="button"
           onClick={() => setShowPreview(!showPreview)}
-          className="text-indigo-600 hover:text-indigo-800 transition-colors"
+          className="text-indigo-400 hover:text-indigo-300 transition-colors"
         >
           <Eye className="w-4 h-4" />
         </button>
       </div>
       <div className="space-y-1 text-sm">
-        <p><span className="font-medium">Event:</span> {formData.eventName || "N/A"}</p>
-        <p><span className="font-medium">Date:</span> {formData.date || "N/A"}</p>
-        <p><span className="font-medium">Venue:</span> {formData.venue || "N/A"}</p>
-        <p><span className="font-medium">Description:</span> {formData.description || "N/A"}</p>
-        <p><span className="font-medium">Price:</span> {formData.price ? `${formData.price} ETH` : "N/A"}</p>
-        <p><span className="font-medium">Max Tickets:</span> {formData.maxTickets || "N/A"}</p>
+        <p><span className="font-medium text-neutral-300">Event:</span> <span className="text-neutral-400">{formData.eventName || "N/A"}</span></p>
+        <p><span className="font-medium text-neutral-300">Date:</span> <span className="text-neutral-400">{formData.date || "N/A"}</span></p>
+        <p><span className="font-medium text-neutral-300">Venue:</span> <span className="text-neutral-400">{formData.venue || "N/A"}</span></p>
+        <p><span className="font-medium text-neutral-300">Description:</span> <span className="text-neutral-400">{formData.description || "N/A"}</span></p>
+        <p><span className="font-medium text-neutral-300">Price:</span> <span className="text-neutral-400">{formData.price ? `${formData.price} ETH` : "N/A"}</span></p>
+        <p><span className="font-medium text-neutral-300">Max Tickets:</span> <span className="text-neutral-400">{formData.maxTickets || "N/A"}</span></p>
         {formData.bannerImage && (
-          <p><span className="font-medium">Image:</span> {formData.bannerImage.name}</p>
+          <p><span className="font-medium text-neutral-300">Image:</span> <span className="text-neutral-400">{formData.bannerImage.name}</span></p>
         )}
       </div>
     </motion.div>
@@ -266,11 +266,11 @@ export default function CreateEventForm() {
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4"
+      className="bg-gradient-to-r from-red-900/50 to-rose-900/50 border border-red-600/30 rounded-lg p-3 mb-4"
     >
       <div className="flex items-center space-x-2">
-        <AlertCircle className="w-4 h-4 text-red-600" />
-        <p className="text-sm text-red-700">{message}</p>
+        <AlertCircle className="w-4 h-4 text-red-400" />
+        <p className="text-sm text-red-300">{message}</p>
       </div>
     </motion.div>
   );
@@ -293,8 +293,8 @@ export default function CreateEventForm() {
   };
 
   return (
-    <div id='create-event' className="max-w-2xl mx-auto p-6 bg-white/70 backdrop-blur-2xl rounded-2xl shadow-xl my-12 relative border-2 hover:border-purple-700 border-t-indigo-600 border-purple-600 border-b-purple-600 ">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyOSwgMTQwLCAyNDgsIDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
+    <div id='create-event' className="max-w-2xl mt-24 mx-auto p-6 bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 backdrop-blur-2xl rounded-2xl shadow-2xl my-12 relative border border-neutral-700/40 hover:border-purple-500/50 transition-all duration-300">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyOSwgMTQwLCAyNDgsIDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-20" />
 
 
 
@@ -307,14 +307,14 @@ export default function CreateEventForm() {
         {/* Header */}
         <motion.div variants={itemVariants} className="text-center space-y-2 ">
           <div className="flex justify-center">
-            <div className="p-3 bg-indigo-100 rounded-full">
-              <Ticket className="w-8 h-8 text-indigo-600" />
+            <div className="p-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full shadow-lg">
+              <Ticket className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            <span className="italic bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-semibold font-serif">Accesly</span> - Create Event
+          <h1 className="text-3xl font-bold text-white">
+            <span className=" bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent font-semibold font-sans">MintMyTicket</span> - Create Event
           </h1>
-          <p className="text-gray-600">Create your event for ticket sales</p>
+          <p className="text-neutral-300">Create your event for ticket sales</p>
         </motion.div>
 
         {/* Progress Indicator */}
@@ -328,12 +328,12 @@ export default function CreateEventForm() {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${step >= num
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-200 text-gray-500'
+                  : 'bg-neutral-700 text-neutral-400'
                   }`}
               >
                 {num}
               </div>
-              <span className="text-xs text-gray-500">{label}</span>
+              <span className="text-xs text-neutral-400">{label}</span>
             </div>
           ))}
         </motion.div>
@@ -356,7 +356,7 @@ export default function CreateEventForm() {
                   <button
                     type="button"
                     onClick={() => setShowPreview(!showPreview)}
-                    className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-800 transition-colors text-sm"
+                    className="flex items-center space-x-2 text-indigo-400 hover:text-indigo-300 transition-colors text-sm"
                   >
                     <Eye className="w-4 h-4" />
                     <span>{showPreview ? "Hide" : "Show"} Preview</span>
@@ -370,7 +370,7 @@ export default function CreateEventForm() {
               <div className="space-y-6 ">
                 {/* Event Name */}
                 <motion.div variants={itemVariants} className="space-y-2">
-                  <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+                  <label className="flex items-center space-x-2 text-sm font-medium text-neutral-300">
                     <Tag className="w-4 h-4" />
                     <span>Event Name</span>
                   </label>
@@ -379,7 +379,7 @@ export default function CreateEventForm() {
                     name="eventName"
                     value={formData.eventName}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 border border-neutral-600 rounded-lg bg-neutral-800/80 text-white placeholder-neutral-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                     placeholder="Enter event name"
                     required
                   />
@@ -388,7 +388,7 @@ export default function CreateEventForm() {
                 {/* Event Date & Venue */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+                    <label className="flex items-center space-x-2 text-sm font-medium text-neutral-300">
                       <Calendar className="w-4 h-4" />
                       <span>Event Date</span>
                     </label>
@@ -398,13 +398,13 @@ export default function CreateEventForm() {
                       value={formData.date}
                       onChange={handleInputChange}
                       min={new Date().toISOString().split('T')[0]}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 border border-neutral-600 rounded-lg bg-neutral-800/80 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                       required
                     />
                   </motion.div>
 
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+                    <label className="flex items-center space-x-2 text-sm font-medium text-neutral-300">
                       <MapPin className="w-4 h-4" />
                       <span>Venue</span>
                     </label>
@@ -413,7 +413,7 @@ export default function CreateEventForm() {
                       name="venue"
                       value={formData.venue}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 border border-neutral-600 rounded-lg bg-neutral-800/80 text-white placeholder-neutral-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                       placeholder="Enter venue"
                       required
                     />
@@ -422,7 +422,7 @@ export default function CreateEventForm() {
 
                 {/* Description - Full Width */}
                 <motion.div variants={itemVariants} className="space-y-2">
-                  <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+                  <label className="flex items-center space-x-2 text-sm font-medium text-neutral-300">
                     <FileText className="w-4 h-4" />
                     <span>Description</span>
                   </label>
@@ -431,7 +431,7 @@ export default function CreateEventForm() {
                     value={formData.description}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 border border-neutral-600 rounded-lg bg-neutral-800/80 text-white placeholder-neutral-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 resize-none"
                     placeholder="Describe your event..."
                   />
                 </motion.div>
@@ -439,7 +439,7 @@ export default function CreateEventForm() {
                 {/* Price & Max Tickets */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+                    <label className="flex items-center space-x-2 text-sm font-medium text-neutral-300">
                       <DollarSign className="w-4 h-4" />
                       <span>Price (ETH)</span>
                     </label>
@@ -450,14 +450,14 @@ export default function CreateEventForm() {
                       name="price"
                       value={formData.price}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 border border-neutral-600 rounded-lg bg-neutral-800/80 text-white placeholder-neutral-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                       placeholder="0.01"
                       required
                     />
                   </motion.div>
 
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+                    <label className="flex items-center space-x-2 text-sm font-medium text-neutral-300">
                       <Users className="w-4 h-4" />
                       <span>Max Tickets</span>
                     </label>
@@ -467,7 +467,7 @@ export default function CreateEventForm() {
                       name="maxTickets"
                       value={formData.maxTickets}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 border border-neutral-600 rounded-lg bg-neutral-800/80 text-white placeholder-neutral-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                       placeholder="50"
                       required
                     />
@@ -476,7 +476,7 @@ export default function CreateEventForm() {
 
                 {/* Banner Image */}
                 <motion.div variants={itemVariants} className="space-y-2">
-                  <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+                  <label className="flex items-center space-x-2 text-sm font-medium text-neutral-300">
                     <Image className="w-4 h-4" />
                     <span>Event Banner</span>
                   </label>
@@ -485,9 +485,9 @@ export default function CreateEventForm() {
                     name="banner"
                     accept="image/*"
                     onChange={handleFileChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 border border-neutral-600 rounded-lg bg-neutral-800/80 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 transition-all duration-200"
                   />
-                  <p className="text-xs text-gray-500">Optional. Max 5MB. Supported formats: JPG, PNG, GIF, WebP</p>
+                  <p className="text-xs text-neutral-400">Optional. Max 5MB. Supported formats: JPG, PNG, GIF, WebP</p>
                 </motion.div>
 
                 {/* Submit Button */}
@@ -518,11 +518,11 @@ export default function CreateEventForm() {
                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full mx-auto"
               />
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-900">Creating Your Event...</h3>
+              <div className="space-y-6 text-neutral-300">
+                <h3 className="text-xl font-semibold text-white">Creating Your Event...</h3>
 
                 {/* Progress Steps */}
-                <div className="space-y-2 text-sm text-gray-600">
+                <div className="space-y-2 text-sm text-neutral-400">
                   {uploadingImage && (
                     <div className="flex items-center justify-center space-x-2">
                       <div className="w-2 h-2 bg-indigo-600 rounded-full animate-pulse" />
@@ -557,21 +557,21 @@ export default function CreateEventForm() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto"
+                className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto shadow-lg"
               >
-                <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </motion.div>
 
               <div className="space-y-3">
-                <h3 className="text-2xl font-bold text-gray-900">Event Created Successfully! 🎉</h3>
-                <p className="text-gray-600">Your event is now live and ready for ticket sales</p>
+                <h3 className="text-2xl font-bold text-white">Event Created Successfully! 🎉</h3>
+                <p className="text-neutral-300">Your event is now live and ready for ticket sales</p>
 
                 {/* Success Details */}
-                <div className="bg-green-50 rounded-lg p-4 space-y-2 text-left">
-                  <h4 className="font-semibold text-green-800">Event Details:</h4>
-                  <div className="text-sm text-green-700 space-y-1">
+                <div className="bg-gradient-to-r from-green-900/50 to-emerald-900/50 border border-green-600/30 rounded-lg p-4 space-y-2 text-left">
+                  <h4 className="font-semibold text-green-300">Event Details:</h4>
+                  <div className="text-sm text-green-400 space-y-1">
                     <p><strong>Event:</strong> {formData.eventName}</p>
                     <p><strong>Date:</strong> {formData.date}</p>
                     <p><strong>Venue:</strong> {formData.venue}</p>
@@ -581,9 +581,9 @@ export default function CreateEventForm() {
                 </div>
 
                 {eventId && (
-                  <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                    <p className="text-sm text-gray-700">Event ID:</p>
-                    <p className="font-mono text-sm text-indigo-600 break-all">{eventId}</p>
+                  <div className="bg-gradient-to-r from-neutral-800/50 to-neutral-700/50 border border-neutral-600/30 rounded-lg p-4 space-y-2">
+                    <p className="text-sm text-neutral-300">Event ID:</p>
+                    <p className="font-mono text-sm text-indigo-400 break-all">{eventId}</p>
                   </div>
                 )}
               </div>
@@ -600,7 +600,7 @@ export default function CreateEventForm() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <motion.button
                   onClick={resetForm}
-                  className="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-indigo-700 transition-colors duration-200"
+                  className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-8 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -609,7 +609,7 @@ export default function CreateEventForm() {
 
                 <motion.button
                   onClick={() => window.location.href = '/events'}
-                  className="border border-indigo-600 text-indigo-600 font-semibold py-3 px-8 rounded-lg hover:bg-indigo-50 transition-colors duration-200"
+                  className="border border-indigo-400 text-indigo-400 font-semibold py-3 px-8 rounded-lg hover:bg-indigo-950 hover:border-indigo-300 hover:text-indigo-300 transition-all duration-200"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

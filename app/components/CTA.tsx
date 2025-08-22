@@ -29,7 +29,7 @@ const CTA = () => {
         </h2>
 
         <p className="text-xl md:text-xl text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed">
-          Join thousands of event creators who trust MintMyTicket for secure,
+          Join thousands of event creators who trust <span className='bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent'>MintMyTicket</span> for secure,
           decentralized ticketing powered by blockchain technology.
         </p>
 

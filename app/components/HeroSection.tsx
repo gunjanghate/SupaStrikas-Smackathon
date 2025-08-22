@@ -118,7 +118,7 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight flex flex-col"
           >
-            <span className={`font-serif ${heroFont.variable} bg-gradient-to-br from-indigo-600  to-purple-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
+            <span className={`font-sans ${heroFont.variable} bg-gradient-to-br from-indigo-600  to-purple-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
               MintMyTicket
             </span>
 

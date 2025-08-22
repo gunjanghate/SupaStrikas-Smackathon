@@ -68,12 +68,25 @@ function VerifyTicketContent() {
       return 'Smart contract not found on this network. Please switch to the correct network.';
     }
 
+    // Check for authorization/permission errors
+    if (errorString.includes('not authorized') ||
+      errorString.includes('not the owner') ||
+      errorString.includes('access denied') ||
+      errorString.includes('unauthorized') ||
+      errorString.includes('Ownable: caller is not the owner') ||
+      errorString.includes('execution reverted')) {
+      return 'UNAUTHORIZED_ACCESS';
+    }
+
     if (errorString.includes('execution reverted')) {
       const reasonMatch = errorString.match(/reason="([^"]+)"/);
       if (reasonMatch && reasonMatch[1]) {
         const reason = reasonMatch[1];
         if (reason.includes('Already claimed')) {
           return 'This ticket has already been claimed and verified.';
+        }
+        if (reason.includes('not authorized') || reason.includes('not the owner')) {
+          return 'UNAUTHORIZED_ACCESS';
         }
         return `Transaction failed: ${reason}`;
       }
@@ -225,7 +238,12 @@ function VerifyTicketContent() {
     } catch (err) {
       console.error('💥 Verification error:', err);
       const friendlyError = parseError(err);
-      setStatus(`❌ ${friendlyError}`);
+
+      if (friendlyError === 'UNAUTHORIZED_ACCESS') {
+        setStatus('UNAUTHORIZED_ACCESS');
+      } else {
+        setStatus(`❌ ${friendlyError}`);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -278,7 +296,12 @@ function VerifyTicketContent() {
     } catch (err) {
       console.error('💥 Claim error:', err);
       const friendlyError = parseError(err);
-      setStatus(`❌ Claim failed: ${friendlyError}`);
+
+      if (friendlyError === 'UNAUTHORIZED_ACCESS') {
+        setStatus('UNAUTHORIZED_ACCESS');
+      } else {
+        setStatus(`❌ Claim failed: ${friendlyError}`);
+      }
     } finally {
       setIsClaimLoading(false);
     }
@@ -428,7 +451,35 @@ function VerifyTicketContent() {
                 <div className="text-3xl">{getStatusIcon()}</div>
                 <div className="flex-1">
                   <h3 className="font-bold text-lg">Verification Status</h3>
-                  <p className="font-semibold text-xl mt-1">{status}</p>
+                  {status === 'UNAUTHORIZED_ACCESS' ? (
+                    <div className="mt-2">
+                      <p className="font-semibold text-xl text-red-400 mb-3">
+                        ❌ Access Denied - Unauthorized Operation
+                      </p>
+                      <div className="bg-red-900/30 border border-red-600/50 rounded-lg p-4 space-y-2">
+                        <h4 className="font-bold text-red-300 text-lg mb-2">🚫 Authorization Required</h4>
+                        <div className="text-red-200 space-y-2 text-sm">
+                          <p><strong>• Only Event Owners can perform this operation</strong></p>
+                          <p>• You are not authorized to claim or verify this ticket</p>
+                          <p>• This action can only be performed by the event organizer</p>
+                          <p>• Make sure you are using the correct wallet address</p>
+                        </div>
+                        <div className="mt-4 p-3 bg-red-800/30 rounded-lg border border-red-600/30">
+                          <p className="text-red-300 text-sm font-medium">
+                            📋 <strong>What you can do:</strong>
+                          </p>
+                          <ul className="text-red-200 text-sm mt-1 space-y-1">
+                            <li>• Contact the event organizer if you believe this is an error</li>
+                            <li>• Verify you're connected with the correct wallet</li>
+                            <li>• Check if you have the proper permissions for this event</li>
+                            <li>• Only ticket owners can claim their own tickets</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="font-semibold text-xl mt-1">{status}</p>
+                  )}
                   {(isLoading || isClaimLoading) && (
                     <div className="flex items-center gap-2 mt-2">
                       <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
@@ -490,8 +541,8 @@ function VerifyTicketContent() {
                   </div>
                   <div className="absolute top-4 right-4">
                     <span className={`px-3 py-1 rounded-full text-sm font-semibold ${isClaimed
-                        ? 'bg-green-500 text-white'
-                        : 'bg-yellow-500 text-white'
+                      ? 'bg-green-500 text-white'
+                      : 'bg-yellow-500 text-white'
                       }`}>
                       {isClaimed ? '✅ Claimed' : '🟡 Unclaimed'}
                     </span>
@@ -563,8 +614,8 @@ function VerifyTicketContent() {
                     onClick={handleClaim}
                     disabled={isClaimLoading}
                     className={`w-full py-4 px-6 rounded-xl font-semibold text-white text-lg transition-all duration-300 ${isClaimLoading
-                        ? 'bg-neutral-600 cursor-not-allowed'
-                        : 'bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 hover:shadow-xl shadow-lg'
+                      ? 'bg-neutral-600 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 hover:shadow-xl shadow-lg'
                       }`}
                   >
                     <div className="flex items-center justify-center space-x-3">
