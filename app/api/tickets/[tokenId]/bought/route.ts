@@ -2,9 +2,9 @@ import { NextResponse, NextRequest } from "next/server";
 import Ticket from "@/models/Ticket";
 import { connectToDB } from "@/lib/mongo";
 
-export async function PATCH(req: NextRequest, { params }: { params: { tokenId: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ tokenId: string }> }) {
     try {
-        const { tokenId } = params;
+        const { tokenId } = await params;
         const { newOwnerWallet, newtxnHash } = await req.json();
 
         if (!newOwnerWallet) {
